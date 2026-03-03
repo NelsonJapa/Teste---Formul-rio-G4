@@ -1,1 +1,164 @@
+/*
+  Estilos base da aplicação
+  - Paleta neutra, foco em legibilidade
+  - Layout fluido e responsivo
+*/
 
+:root {
+  --bg: #f7f8fa;
+  --card: #ffffff;
+  --text: #1b1f24;
+  --muted: #6b7280;
+  --primary: #2563eb;
+  --primary-contrast: #ffffff;
+  --border: #e5e7eb;
+}
+
+/* Reset básico */
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+/* Barra superior */
+.topbar {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 16px;
+}
+.topbar h1 {
+  margin: 0;
+  font-size: 20px;
+}
+
+/* Container principal */
+.container {
+  max-width: 980px;
+  margin: 24px auto;
+  padding: 0 16px;
+}
+
+/* Blocos (cards) */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+/* Grades para inputs */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* Campos e labels */
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+}
+input, select {
+  padding: 10px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+/* Área de serviços (grid de cards) */
+.servicos {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 12px;
+}
+.servico {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.servico h3 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+}
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Badge de horas */
+.badge {
+  display: inline-block;
+  background: #eef2ff;
+  color: #3730a3;
+  border: 1px solid #c7d2fe;
+  border-radius: 999px;
+  padding: 2px 8px;
+  font-size: 12px;
+}
+
+/* Descrição do serviço */
+.desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.4;
+  white-space: pre-wrap;     /* preserva quebras de linha do JSON */
+  max-height: 8.5em;
+  overflow: auto;
+}
+
+/* Select de cargo */
+select.cargo {
+  min-width: 160px;
+}
+
+/* Ações e status */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: flex-start;
+}
+.btnPrimary {
+  background: var(--primary);
+  color: var(--primary-contrast);
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btnPrimary:hover {
+  opacity: .95;
+}
+.status {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* Rodapé simples */
+.footer {
+  padding: 24px;
+  text-align: center;
+  color: var(--muted);
+}
+
+/* Texto secundário */
+.muted { color: var(--muted); }
+
+/* Responsividade: 1 coluna em telas estreitas */
+@media (max-width: 640px) {
+  .grid { grid-template-columns: 1fr; }
+}
