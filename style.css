@@ -1,20 +1,25 @@
-/*
-  Estilos base da aplicação
-  - Paleta neutra, foco em legibilidade
-  - Layout fluido e responsivo
-*/
-
+/* ==================== Tema / Variáveis ==================== */
 :root {
-  --bg: #f7f8fa;
-  --card: #ffffff;
-  --text: #1b1f24;
-  --muted: #6b7280;
-  --primary: #2563eb;
+  --bg: #f7f8fa;            /* fundo geral */
+  --card: #ffffff;          /* cartões */
+  --text: #1b1f24;          /* texto principal */
+  --muted: #6b7280;         /* texto secundário */
+  --primary: #2563eb;       /* cor ação primária (botão) */
   --primary-contrast: #ffffff;
-  --border: #e5e7eb;
+  --border: #e5e7eb;        /* bordas suaves */
+
+  /* Paleta para chips (cargos) */
+  --chip-bg: #ffffff;
+  --chip-border: #e5e7eb;
+  --chip-hover-bg: #f9fafb;
+  --chip-hover-border: #d1d5db;
+  --chip-checked-bg: #eef6ff;
+  --chip-checked-border: #bfdbfe;
+  --chip-checked-text: #0b3b77;
+  --chip-mark: #3b82f6;     /* gradiente do “check” */
 }
 
-/* Reset básico */
+/* ==================== Base / Layout ==================== */
 * { box-sizing: border-box; }
 html, body { height: 100%; }
 body {
@@ -24,7 +29,6 @@ body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
-/* Barra superior */
 .topbar {
   background: var(--card);
   border-bottom: 1px solid var(--border);
@@ -35,14 +39,12 @@ body {
   font-size: 20px;
 }
 
-/* Container principal */
 .container {
   max-width: 980px;
   margin: 24px auto;
   padding: 0 16px;
 }
 
-/* Blocos (cards) */
 .card {
   background: var(--card);
   border: 1px solid var(--border);
@@ -51,14 +53,12 @@ body {
   margin-bottom: 16px;
 }
 
-/* Grades para inputs */
 .grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
-/* Campos e labels */
 label {
   display: flex;
   flex-direction: column;
@@ -72,7 +72,7 @@ input, select {
   font-size: 14px;
 }
 
-/* Área de serviços (grid de cards) */
+/* ==================== Listagem de Serviços ==================== */
 .servicos {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -98,7 +98,6 @@ input, select {
   flex-wrap: wrap;
 }
 
-/* Badge de horas */
 .badge {
   display: inline-block;
   background: #eef2ff;
@@ -109,22 +108,97 @@ input, select {
   font-size: 12px;
 }
 
-/* Descrição do serviço */
 .desc {
   font-size: 13px;
   color: var(--muted);
   line-height: 1.4;
-  white-space: pre-wrap;     /* preserva quebras de linha do JSON */
+  white-space: pre-wrap;
   max-height: 8.5em;
   overflow: auto;
 }
 
-/* Select de cargo */
-select.cargo {
-  min-width: 160px;
+/* ==================== Chips (pílulas) – Cargos em COLUNA ==================== */
+.cargo-group {
+  display: flex;
+  flex-direction: column;     /* um em cima do outro */
+  gap: 8px;
+  margin-top: 6px;
 }
 
-/* Ações e status */
+/* Esconde o checkbox nativo, mantendo acessibilidade */
+.cargoOption input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Pílula clicável */
+.cargoOption {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid var(--chip-border);
+  border-radius: 999px;
+  background: var(--chip-bg);
+  color: var(--text);
+  cursor: pointer;
+  user-select: none;
+  transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, color .15s ease;
+}
+
+/* “Ícone” visual do checkbox (quadradinho macio) */
+.cargoOption::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1.5px solid #cbd5e1;
+  background: #fff;
+  box-shadow: inset 0 0 0 2px transparent;
+  transition: all .15s ease;
+}
+
+/* Hover */
+.cargoOption:hover {
+  background: var(--chip-hover-bg);
+  border-color: var(--chip-hover-border);
+}
+
+/* Foco (acessibilidade) */
+.cargoOption:has(input[type="checkbox"]:focus-visible) {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+/* Estado marcado */
+.cargoOption:has(input[type="checkbox"]:checked) {
+  background: var(--chip-checked-bg);
+  border-color: var(--chip-checked-border);
+  color: var(--chip-checked-text);
+}
+.cargoOption:has(input[type="checkbox"]:checked)::before {
+  border-color: #60a5fa;
+  background: linear-gradient(135deg, var(--chip-mark), #60a5fa);
+  box-shadow: inset 0 0 0 2px #fff;
+}
+
+/* Ícone “✓” alinhado à direita quando marcado */
+.cargoOption::after {
+  content: "";
+  width: 0;
+  height: 0;
+  transition: width .15s ease, height .15s ease;
+}
+.cargoOption:has(input[type="checkbox"]:checked)::after {
+  content: "✓";
+  font-weight: 700;
+  color: var(--primary);
+  margin-left: auto; /* empurra para a direita */
+}
+
+/* ==================== Ações / Rodapé ==================== */
 .actions {
   display: flex;
   align-items: center;
@@ -140,25 +214,20 @@ select.cargo {
   font-weight: 600;
   cursor: pointer;
 }
-.btnPrimary:hover {
-  opacity: .95;
-}
+.btnPrimary:hover { opacity: .95; }
+
 .status {
   font-size: 14px;
   color: var(--muted);
 }
 
-/* Rodapé simples */
 .footer {
   padding: 24px;
   text-align: center;
   color: var(--muted);
 }
 
-/* Texto secundário */
-.muted { color: var(--muted); }
-
-/* Responsividade: 1 coluna em telas estreitas */
+/* Responsivo */
 @media (max-width: 640px) {
   .grid { grid-template-columns: 1fr; }
 }
