@@ -1,14 +1,14 @@
-/* ==================== Tema / Variáveis ==================== */
+/* ==================== Tema / Variáveis (paleta original) ==================== */
 :root {
-  --bg: #f7f8fa;            /* fundo geral */
+  --bg: #f7f8fa;            /* fundo geral (original) */
   --card: #ffffff;          /* cartões */
   --text: #1b1f24;          /* texto principal */
   --muted: #6b7280;         /* texto secundário */
-  --primary: #2563eb;       /* cor ação primária (botão) */
+  --primary: #2563eb;       /* cor do botão */
   --primary-contrast: #ffffff;
   --border: #e5e7eb;        /* bordas suaves */
 
-  /* Paleta para chips (cargos) */
+  /* Paleta dos chips de cargo */
   --chip-bg: #ffffff;
   --chip-border: #e5e7eb;
   --chip-hover-bg: #f9fafb;
@@ -148,7 +148,7 @@ input, select {
   transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, color .15s ease;
 }
 
-/* “Ícone” visual do checkbox (quadradinho macio) */
+/* “Ícone” do check (quadradinho macio) */
 .cargoOption::before {
   content: "";
   width: 16px;
@@ -184,7 +184,7 @@ input, select {
   box-shadow: inset 0 0 0 2px #fff;
 }
 
-/* Ícone “✓” alinhado à direita quando marcado */
+/* ✓ alinhado à direita quando marcado */
 .cargoOption::after {
   content: "";
   width: 0;
@@ -195,7 +195,7 @@ input, select {
   content: "✓";
   font-weight: 700;
   color: var(--primary);
-  margin-left: auto; /* empurra para a direita */
+  margin-left: auto;
 }
 
 /* ==================== Ações / Rodapé ==================== */
